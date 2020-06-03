@@ -1,7 +1,6 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
-var battle = require('./battle.js');
 var dbSQL = require('./db.js');
 // Configure logger settings
 
@@ -9,7 +8,6 @@ var dbSQL = require('./db.js');
 //全域變數系列
 var Timer;
 var DefaultCmd = false;
-var AdminChannel;
 
 //收回內容
 var Talks = new Array;
@@ -152,36 +150,6 @@ bot.on("message", function (user, userID, channelID, message, evt) {
                             message: '噴阿，雨緣你倒是噴阿'
                         });
                         break;
-                    case 'battle':
-                        battle.fight(user, args[1], args[2], args[3], function (msg) {
-                            bot.sendMessage({
-                                to: channelID,
-                                message: msg
-                            });
-                        })
-                        break;
-                    case 'teach':
-                        dbSQL.teached(' botmessage ', args[1], args[2], function (msg) {
-                            bot.sendMessage({
-                                to: channelID,
-                                message: msg
-                            });
-                        })
-                        break;
-                    case 'setchid':
-                        AdminChannel = args[1]
-                        bot.sendMessage({
-                            to: channelID,
-                            message: `收到了!當前使用頻道ID為${AdminChannel}`
-                        });
-                        break;
-                    case 'settalk':
-                        if (AdminChannel !== undefined) {
-                            bot.sendMessage({
-                                to: AdminChannel,
-                                message: args[1]
-                            })
-                        }
                 }
             }
         }
