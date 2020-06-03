@@ -47,8 +47,6 @@ dbSQL.openSQL();
 //活動狀態
 bot.on('any', function (evt) {
 
-    console.log(evt);
-
     //將對話存入變數(最後50句)
     if (evt.t === 'MESSAGE_CREATE') {
         if (Talks.length <= 50) {
